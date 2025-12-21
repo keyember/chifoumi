@@ -46,7 +46,7 @@ html.force-light {
   border: 2px solid light-dark(#070709, #efefec);
   border-radius: 15px;
   padding: 30px;
-  scale: 150%;
+  scale: 140%;
   gap: 20px;
 }
 
@@ -120,4 +120,26 @@ h2 {
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+#victories {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border: 1px solid light-dark(#070709, #efefec);
+  border-radius: 10px;
+  padding: 5px;
+  margin-left: 300px;
+  margin-right: 300px;
+}
+
+#victories p {
+  font-weight: bold;
+}
+
+#wins {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
 }

@@ -40,6 +40,16 @@ function getRandomChoice() {
 }
 
 // Logique du jeu
+
+const userWinsSpan = document.getElementById("userWinsValue");
+const senseiWinsSpan = document.getElementById("senseiWinsValue");
+
+let scoreJoueur = parseInt(localStorage.getItem("userWins")) || 0;
+let scoreSensei = parseInt(localStorage.getItem("senseiWins")) || 0;
+
+userWinsSpan.textContent = scoreJoueur;
+senseiWinsSpan.textContent = scoreSensei;
+
 rock.addEventListener("click", () => {
   gameDesc.style.border = "1px solid light-dark(#070709, #efefec)";
   gameDesc.style.borderRadius = "10px";
@@ -63,11 +73,17 @@ rock.addEventListener("click", () => {
     gameDesc.appendChild(matchResume);
     matchResume.style.fontWeight = "bold";
     matchResume.textContent = "C'est une victoire, bravo !";
+    scoreJoueur++;
+    localStorage.setItem("userWins", scoreJoueur);
+    userWinsSpan.textContent = scoreJoueur;
   } else if (senseiResult2.textContent === choices[2]) {
     const matchResume = document.createElement("p");
     gameDesc.appendChild(matchResume);
     matchResume.style.fontWeight = "bold";
     matchResume.textContent = "C'est une défaite...";
+    scoreSensei++;
+    localStorage.setItem("senseiWins", scoreSensei);
+    senseiWinsSpan.textContent = scoreSensei;
   }
 });
 paper.addEventListener("click", () => {
@@ -88,11 +104,17 @@ paper.addEventListener("click", () => {
     gameDesc.appendChild(matchResume);
     matchResume.style.fontWeight = "bold";
     matchResume.textContent = "C'est une victoire, bravo !";
+    scoreJoueur++;
+    localStorage.setItem("userWins", scoreJoueur);
+    userWinsSpan.textContent = scoreJoueur;
   } else if (senseiResult2.textContent === choices[1]) {
     const matchResume = document.createElement("p");
     gameDesc.appendChild(matchResume);
     matchResume.style.fontWeight = "bold";
     matchResume.textContent = "C'est une défaite...";
+    scoreSensei++;
+    senseiWinsSpan.textContent = scoreSensei;
+    localStorage.setItem("senseiWins", scoreSensei);
   } else if (senseiResult2.textContent === choices[2]) {
     const matchResume = document.createElement("p");
     gameDesc.appendChild(matchResume);
@@ -118,6 +140,9 @@ scissors.addEventListener("click", () => {
     gameDesc.appendChild(matchResume);
     matchResume.style.fontWeight = "bold";
     matchResume.textContent = "C'est une défaite...";
+    scoreSensei++;
+    localStorage.setItem("senseiWins", scoreSensei);
+    senseiWinsSpan.textContent = scoreSensei;
   } else if (senseiResult2.textContent === choices[1]) {
     const matchResume = document.createElement("p");
     gameDesc.appendChild(matchResume);
@@ -128,5 +153,24 @@ scissors.addEventListener("click", () => {
     gameDesc.appendChild(matchResume);
     matchResume.style.fontWeight = "bold";
     matchResume.textContent = "C'est une victoire, bravo !";
+    scoreJoueur++;
+    localStorage.setItem("userWins", scoreJoueur);
+    userWinsSpan.textContent = scoreJoueur;
   }
+});
+
+const resetBtn = document.getElementById("resetBtn");
+
+resetBtn.addEventListener("click", () => {
+  localStorage.removeItem("userWins");
+  localStorage.removeItem("senseiWins");
+
+  scoreJoueur = 0;
+  scoreSensei = 0;
+
+  localStorage.setItem("userWins", scoreJoueur);
+  localStorage.setItem("senseiWins", scoreSensei);
+
+  userWinsSpan.textContent = scoreJoueur;
+  senseiWinsSpan.textContent = scoreSensei;
 });
